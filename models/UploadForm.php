@@ -22,7 +22,6 @@ class UploadForm extends Model
     {
         if ($this->validate()) {
             foreach ($this->upfile as $file) {
-                $_SESSION['loadingFile'] = $file->baseName;
                 $file->saveAs(Yii::getAlias('@webroot') . '/uploads/' . $file->baseName . '.' . $file->extension);
             }
             return true;

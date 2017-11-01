@@ -12,9 +12,18 @@ $this->registerJsFile('js/upload.js', ['depends' => 'yii\bootstrap\BootstrapPlug
 
 <?= $form->field($model, 'upfile[]')->fileInput(['multiple' => true, 'accept' => 'xls/*']) ?>
 
+<div id="load" class="btn-group" data-toggle="buttons">
+</div>
+
     <button class="submit button">Submit</button>
+    <button class="reset-button">Очистить</button>
 
 <?php ActiveForm::end() ?>
 
-<div id="load" class="btn-group" data-toggle="buttons">
+<div id="showPercentLoading" style="display: none">
+    <div class="progress progress-striped active">
+        <div id="percent" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+            0%
+        </div>
+    </div>
 </div>

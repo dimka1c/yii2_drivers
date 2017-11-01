@@ -35,10 +35,7 @@ class UploadController extends Controller
     public function actionUploadFile()
     {
         if (Yii::$app->request->isAjax) {
-            if (isset($_FILES)) {
-                if (!Yii::$app->session->isActive) {
-                    Yii::$app->session->open();
-                }
+            if (!empty($_FILES)) {
                 $model = new UploadForm();
                 if (Yii::$app->request->isPost) {
                     $model->upfile = UploadedFile::getInstancesByName('upfile');
@@ -53,10 +50,4 @@ class UploadController extends Controller
         }
     }
 
-    public function actionProcessLoading()
-    {
-        if (Yii::$app->request->isAjax) {
-            echo json_encode($_SESSION['loadingFile']);
-        }
-    }
 }
