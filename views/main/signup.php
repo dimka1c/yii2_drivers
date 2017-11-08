@@ -27,6 +27,11 @@ use yii\helpers\Html;
         'placeholder' => 'Например: email@example.com'
     ]])
     ->Input('email', ['class'=>'form-control text-center']) ?>
+<?= $form->field($model, 'verifyCode')->widget(
+        \himiklab\yii2\recaptcha\ReCaptcha::className(),
+        ['siteKey' => '6LcoRTYUAAAAAALZ8uJyASHOiwzY7dB9GVlQAOjw']
+    )
+?>
 
     <div class="form-group">
         <?= Html::submitButton('Регистрация', ['class' => 'btn btn-success']) ?>

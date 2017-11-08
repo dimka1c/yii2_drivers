@@ -21,7 +21,7 @@ $( document ).ready( function() {
             if (id_one == null) {
                 id_one = id;
             }
-            $('#load').append('<label class="btn btn-default loading" id="'+id+'">'+id+'</label>');
+            $('#load').append('<label class="btn btn-default loading" id="'+id+'">'+id+' <span id="yesLoad" class=""></span></label>');
         }
         qFiles = files.length; // количество файлов к загрузке
         qQueryForSave = 0;
@@ -75,11 +75,11 @@ $( document ).ready( function() {
                     success: function( respond, textStatus, jqXHR ) {
                         //console.log( 'ответ от сервера ' + respond );
                         $('#'+respond).removeClass('btn-default').addClass('btn-success');
+                        $('#'+respond+' span').addClass('glyphicon glyphicon-ok').css('color', 'white');
                         qAnswer++;
                         percentComplete = Math.round((qAnswer / qFiles ) * 100);
                         $('.progress-bar').html( Math.round( percentComplete ) + '%');
                         $(".progress-bar").css("width", percentComplete+'%');
-                        //$('#load').removeClass('btn-default').addClass('btn-success');
                         if ( percentComplete == 100) {
                             $('#messageTitle').html('Сообщение');
                             $('#messageText').html('Файлы успешно загружены.');
@@ -92,6 +92,10 @@ $( document ).ready( function() {
                         console.log(jqXHR);
                         console.log(textStatus);
                         console.log(errorThrown);
+                        $('#messageTitle').html('Ошибка!!!');
+                        $('#messageText').html('Файлы не загружены');
+                        $('#messageLoading').removeData('alert-success').addClass('alert-danger').slideDown();
+                        $('#showPercentLoading').hide();
                     },
                     beforeSend: function() {
                         qQueryForSave++;

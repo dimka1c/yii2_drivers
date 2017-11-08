@@ -32,47 +32,47 @@ $this->registerJsFile('/js/no_auth.js',  ['depends' => [\yii\web\JqueryAsset::cl
     <body>
     <?php $this->beginBody() ?>
 
-    <div class="container top-line">
-        <h1>Омега-Автопоставка</h1>
-        <div class="clear-loading spinner">
-            <span></span>
-        </div>
+    <div class="container-fluid">
+        <div class="container top-line">
+            <h1>Омега-Автопоставка</h1>
+            <div class="clear-loading spinner">
+                <span></span>
+            </div>
 
-        <?php
+            <?php
             if (Yii::$app->session->hasFlash('registration_new_user')) {
                 echo Yii::$app->session->getFlash('registration_new_user', true);
             }
-        ?>
-
-    </div>
-    <div class="wrapper">
-
-        <?= $content ?>
-
-        <div class="data">
-            <div class="column">
-                <div class="days_site" id="days"></div>
+            ?>
+        </div>
+        <div class="container-fluid">
+            <div class="wrapper">
+                <?= $content ?>
+                <div class="data">
+                    <div class="column">
+                        <div class="days_site" id="days"></div>
+                    </div>
+                </div>
+                <div class="clock">
+                    <div class="column">
+                        <div class="timer" id="hours"></div>
+                    </div>
+                    <div class="timer">:</div>
+                    <div class="column">
+                        <div class="timer" id="minutes"></div>
+                    </div>
+                    <div class="timer">:</div>
+                    <div class="column">
+                        <div class="timer" id="seconds"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="clock">
-            <div class="column">
-                <div class="timer" id="hours"></div>
-            </div>
-            <div class="timer">:</div>
-            <div class="column">
-                <div class="timer" id="minutes"></div>
-            </div>
-            <div class="timer">:</div>
-            <div class="column">
-                <div class="timer" id="seconds"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="navbar-fixed-bottom row-fluid">
-        <div class="navbar-inner">
-            <div class="container">
-                <p class="copiryght">Copyright by Parshyn Dmitry специально для Омега-Автопоставка КРД-Днепр</p>
+        <div class="navbar-fixed-bottom row-fluid">
+            <div class="navbar-inner">
+                <div class="container">
+                    <p class="copiryght">Copyright by Parshyn Dmitry специально для Омега-Автопоставка КРД-Днепр</p>
+                </div>
             </div>
         </div>
     </div>

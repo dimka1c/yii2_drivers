@@ -10,6 +10,7 @@ namespace app\controllers;
 
 
 use app\models\LoginForm;
+use app\models\RememberForm;
 use app\models\SignupForm;
 use app\models\User;
 use yii\web\Controller;
@@ -17,12 +18,14 @@ use Yii;
 use yii\helpers\Url;
 
 
+
 class MainController extends Controller
 {
 
+    public $layout = 'osn';
+
     public function actionIndex()
     {
-        $this->layout = 'osn';
         if (Yii::$app->user->isGuest) {
             $model = new LoginForm();
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -45,10 +48,13 @@ class MainController extends Controller
 
     public function actionSignup()
     {
-        $this->layout = 'osn';
         if (!Yii::$app->user->isGuest) {
             $this->goHome();
         }
+
+        //patteern regexp for фамилия И.О.
+        // ^[А-ЯЁа-яё]+ [А-ЯЁ]\.[А-ЯЁ]\.$
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $user = new User();
@@ -82,10 +88,49 @@ class MainController extends Controller
 
     public function actionRememberMe()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->render('remember');
+        if (Yii::$app->user->isGuest) {
+            $model = new RememberForm();
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $user = User::findByUserEmail($model->email);
+                if ($user) {
+                    // нашли пользователя и отправляем новый пароль на email
+                    // Запишем новый пароль в базу данных
+                    $newPassword = Yii::$app->security->generateRandomString(10);
+                    $user->password = Yii::$app->security->generatePasswordHash($newPassword);
+                    if ($user->save()) {
+                        // после успешной записи отправим новый пароль на почту
+                        debug($newPassword);
+                        debug($user->password);
+                        $mail = Yii::$app->mailer->compose()
+                            ->setFrom('omega.dnepr@gmail.com')
+                            ->setTo($user->email)
+                            ->setSubject('Восстановление пароля omega.dnepr')
+                            ->setTextBody("Вы запросили восстановление пароля на сайте omega.dnepr\n
+                                      Ваш новый пароль:\n" . $newPassword)
+                            ->send();
+
+                        Yii::$app->session->setFlash('rememberMe',
+                            '<div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Внимание!</strong> Новый пароль выслан на email
+                            </div>'
+                        );
+                        return $this->redirect('/main/index');
+                    } else {
+                        // не удалось сохранить пароль в базе данных
+                        Yii::$app->session->setFlash('rememberMe',
+                            '<div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Ошибка!</strong> Не удалось поменять пароль
+                            </div>'
+                        );
+                        return $this->render('rememberme', compact('model'));
+                    }
+                }
+            }
+            return $this->render('remember', compact('model'));
         }
-        $this->goHome();
+        return $this->goHome();
     }
 
     public function actionAccessDenied()
@@ -93,5 +138,4 @@ class MainController extends Controller
         $this->layout = 'accessdenied';
         return $this->render('accessdenied');
     }
-
 }

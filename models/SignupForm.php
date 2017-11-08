@@ -18,6 +18,7 @@ class SignupForm extends Model
     public $password;
     public $fullname;
     public $email;
+    public $verifyCode;
 
     public function rules() {
         return [
@@ -29,9 +30,11 @@ class SignupForm extends Model
             [['password'], 'required'],
             [['fullname'], 'trim'],
             [['fullname'], 'required'],
+            [['fullname'], 'match', 'pattern' => '/^[А-ЯЁа-яё]+ [А-ЯЁ]\.[А-ЯЁ]\.$/u', 'message' => 'Пример: Иванов И.И.'],
             [['fullname'], 'unique', 'targetClass' => User::className(), 'message' => 'Такой пользователь уже зарегистрирован'],
             [['email'], 'email'],
             [['email'], 'default'],
+            [['verifyCode'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LcoRTYUAAAAAHBvOLHZON1XnYdbqww8GxeBMZKG', 'uncheckedMessage' => 'Я не бот']
 
         ];
     }
@@ -42,6 +45,7 @@ class SignupForm extends Model
             'password' => 'Пароль (обязательное поле)',
             'fullname' => 'Полное имя (обязательное поле)',
             'email' => 'Email (для восстановления пароля)',
+            'verifyCode' => false,
         ];
     }
 }

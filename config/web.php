@@ -9,7 +9,23 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'defaultRoute' => 'main',
+    'modules' => [
+        'driver' => [
+            'class' => 'app\modules\driver\Module',
+            'defaultRoute' => 'main',
+        ],
+        'services' => [
+            'class' => 'app\modules\services\Module',
+            'defaultRoute' => 'service',
+        ]
+    ],
     'components' => [
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6LcoRTYUAAAAAALZ8uJyASHOiwzY7dB9GVlQAOjw',
+            'secret' => '6LcoRTYUAAAAAHBvOLHZON1XnYdbqww8GxeBMZKG',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'DRC2iT7IGsMX-LFt0Nyu_m3PlMvW5rUl',
