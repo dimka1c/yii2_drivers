@@ -8,17 +8,17 @@
 
 namespace app\modules\driver\controllers;
 
-use app\modules\driver\models\Client;
-use Yii;
-use yii\base\ErrorException;
-use yii\helpers\Url;
-
 class MainController extends AppDriverController
 {
 
     public function actionIndex()
     {
-        return $this->render('main');
+        return $this->render('index');
+    }
+
+    public function actionOne()
+    {
+        return $this->render('index');
     }
 
 }

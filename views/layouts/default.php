@@ -43,7 +43,11 @@ $this->registerJsFile('/js/no_auth.js',  ['depends' => [\yii\web\JqueryAsset::cl
             if (Yii::$app->session->hasFlash('registration_new_user')) {
                 echo Yii::$app->session->getFlash('registration_new_user', true);
             }
+            if (Yii::$app->session->hasFlash('accessDenied')) {
+                echo Yii::$app->session->getFlash('accessDenied', true);
+            }
             ?>
+
         </div>
         <div class="container-fluid">
             <div class="wrapper">

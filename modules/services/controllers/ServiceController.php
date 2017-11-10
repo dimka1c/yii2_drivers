@@ -2,6 +2,7 @@
 
 namespace app\modules\services\controllers;
 
+use Codeception\Module\Cli;
 use yii\web\Controller;
 use Yii;
 use app\modules\services\models\Client;
@@ -25,7 +26,6 @@ class ServiceController extends Controller
         if ($path == null) {
             $path = Yii::getAlias('@web') . '/web/files/';
         }
-
         if (Client::csvToArray()) {
             $countNewRecords = 0;    // колво новых записей
             $addressProcessed = 0;  // колво обработанных адресов

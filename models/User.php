@@ -4,7 +4,7 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use yii;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
@@ -103,5 +103,17 @@ class User extends ActiveRecord implements IdentityInterface
             ],
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->authKey = Yii::$app->security->generateRandomString();
+            }
+            return true;
+        }
+        return false;
+    }
+
 
 }

@@ -10,6 +10,10 @@ $config = [
     'bootstrap' => ['log'],
     'defaultRoute' => 'main',
     'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+            'defaultRoute' => 'main',
+        ],
         'driver' => [
             'class' => 'app\modules\driver\Module',
             'defaultRoute' => 'main',
@@ -17,7 +21,7 @@ $config = [
         'services' => [
             'class' => 'app\modules\services\Module',
             'defaultRoute' => 'service',
-        ]
+        ],
     ],
     'components' => [
         'reCaptcha' => [
@@ -37,6 +41,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['main/index'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

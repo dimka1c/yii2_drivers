@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 016 16.10.17
- * Time: 19:57
- */
 
 namespace app\controllers;
 
-
+use app\components\behaviors\RulesBehaviors;
 use app\models\LoginForm;
 use app\models\RememberForm;
 use app\models\SignupForm;
@@ -17,12 +11,10 @@ use yii\web\Controller;
 use Yii;
 use yii\helpers\Url;
 
-
-
 class MainController extends Controller
 {
 
-    public $layout = 'osn';
+    public $layout = 'default';
 
     public function actionIndex()
     {
@@ -31,12 +23,12 @@ class MainController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 if ($model->login()) {
                     // пользователь зареган
-                    return $this->redirect(Url::to('auth/index'));
+                    return $this->redirect(Url::to($this->getPath()));
                 }
             }
             return $this->render('index', compact('model'));
         }
-        return $this->redirect(Url::to('auth/index'));
+        return $this->redirect(Url::to($this->getPath()));
     }
 
 
@@ -137,5 +129,14 @@ class MainController extends Controller
     {
         $this->layout = 'accessdenied';
         return $this->render('accessdenied');
+    }
+
+    public function behaviors()
+    {
+        return [
+            'route' => [
+                'class' => RulesBehaviors::className(),
+            ],
+        ];
     }
 }
