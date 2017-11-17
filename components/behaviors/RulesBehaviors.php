@@ -6,9 +6,7 @@
 namespace app\components\behaviors;
 
 use yii\base\Behavior;
-use yii\helpers\Url;
-use yii\web\Controller;
-use yii\web\User;
+
 
 class RulesBehaviors extends Behavior
 {

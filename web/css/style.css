@@ -388,4 +388,12 @@ a {
 .registration {
     color: #fff3c2;
 }
+
+.service {
+    position: absolute;
+    top: 120px;
+    left: 20px;
+    display: none;
+}
+
 /*-- //Responsive-Code --*/

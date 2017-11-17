@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\services;
+use app\components\behaviors\AccessBehaviors;
 
 /**
  * services module definition class
@@ -20,5 +21,15 @@ class Module extends \yii\base\Module
         parent::init();
 
         // custom initialization code goes here
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessBehaviors::className(),
+                'root' => ['admin'],
+            ],
+        ];
     }
 }

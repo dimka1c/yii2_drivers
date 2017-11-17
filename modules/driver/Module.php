@@ -2,6 +2,7 @@
 
 namespace app\modules\driver;
 
+use app\components\behaviors\AccessBehaviors;
 use yii\filters\AccessControl;
 
 /**
@@ -28,7 +29,7 @@ class Module extends \yii\base\Module
     public function behaviors()
     {
         return [
-            'access' => [
+/*            'access' => [
                 'class' => AccessControl::className(),
                 'denyCallback' => function ($rule, $action) {
                     //throw new \Exception('У вас нет доступа к этой странице');
@@ -47,6 +48,10 @@ class Module extends \yii\base\Module
                         'roles' => ['@'],
                     ]
                 ]
+            ]*/
+            'access' => [
+                'class' => AccessBehaviors::className(),
+                'root' => ['driver'],
             ]
         ];
     }

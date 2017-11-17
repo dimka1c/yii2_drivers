@@ -2,8 +2,10 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\DriversModel;
 use app\modules\admin\models\EmailModel;
 use yii\web\Controller;
+
 
 
 /**
@@ -12,7 +14,6 @@ use yii\web\Controller;
 class MainController extends Controller
 {
 
-    public $title = 'Администратор';
     public $layout = 'admin';
     public $role;
 
@@ -32,7 +33,8 @@ class MainController extends Controller
 
     public function actionDrivers()
     {
-        return $this->render('drivers');
+        $drivers = DriversModel::find()->all();
+        return $this->render('drivers', ['drivers' => $drivers]);
     }
 
     public function actionRuns()
