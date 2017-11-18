@@ -69,6 +69,7 @@ $config = [
             'rules' => [
                 'signup' => 'main/signup',
                 'login' => 'main/index',
+                'admin/main/view-user/<id:\d+>' => 'admin/main/view-user',
             ],
         ],
     ],

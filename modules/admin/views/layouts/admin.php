@@ -37,6 +37,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
+                ['label' => 'Пользователи', 'url' => ['/admin/main/users']],
                 ['label' => 'Создание МЛ', 'url' => ['/admin/main/create-ml']],
                 ['label' => 'Водители', 'url' => ['/admin/main/drivers']],
                 ['label' => 'Пробеги', 'url' => ['/admin/main/runs']],

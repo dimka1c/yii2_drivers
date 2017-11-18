@@ -48,10 +48,14 @@
         </table>
 </div>
 
-<div id="service" class="container-fluid service">
-    <a href="drivers.php">Редактировать данные</a><br>
-    <a href="drivers.php">Редактировать данные</a><br>
-    <a href="drivers.php">Редактировать данные</a><br>
-    <a href="drivers.php">Редактировать данные</a><br>
-    <a href="drivers.php">Редактировать данные</a><br>
+<div id="service" class="service">
+    <ul>
+        <li class="active"><a href="#">За 30 дней</a></li>
+        <li><a href="#">За 14 дней</a></li>
+        <li><a href="#">За 7 дней</a></li>
+        <li><a href="#">За 1 день</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="active"><a href="#">С описанием</a></li>
+        <li class=""><a href="#">Только заголовки</a></li>
+    </ul>
 </div>
